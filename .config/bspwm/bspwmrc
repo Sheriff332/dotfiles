@@ -1,0 +1,45 @@
+#!/bin/bash
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+bspc monitor -d             
+#home browse code game music notes misc
+
+bspc config border_width         4
+bspc config window_gap          12
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+# Enable the longest_side automatic scheme
+bspc config automatic_scheme          longest_side
+bspc config initial_polarity          second_child
+
+#AutoStart applications
+#picom --config $HOME/.config/picom/picom.conf &
+polybar &
+pkill picom
+picom -b &
+# picom --expiremental-backends --no-use-damage &
+copyq &
+dunst &
+
+bspc config normal_border_color "#32270b"
+bspc config focused_border_color "#6a5834"
+bspc config single_monocle true
+bspc config pointer_action1 move
+
+#Floating Windows
+#bspc rule -a myProgram state=floating
+
+bspc rule -a pavucontrol state=floating
+bspc rule -a krunner state=floating
+bspc rule -a spectacle state=floating
+bspc rule -a konsole state=floating sticky=on rectangle=1020x720+460+36
+
+#Force a window into a desktop
+#bspc rule -a myProgram desktop="^desktopname"
+bspc rule -a firefox desktop=""
+bspc rule -a VSCodium desktop=""
+bspc rule -a com.github.th_ch.youtube_music desktop=""
